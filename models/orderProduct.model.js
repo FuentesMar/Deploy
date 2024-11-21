@@ -1,17 +1,27 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../db.js';
-import Order from './order.model.js';
-import Product from './product.model.js'; 
+import sequelize from '../config/db.js'; // O el archivo de configuración adecuado
 
 const OrderProduct = sequelize.define('OrderProduct', {
-    idOrderProduct: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    idOrder: { type: DataTypes.INTEGER },
-    idProduct: { type: DataTypes.INTEGER },
-    requestedQuantity: { type: DataTypes.INTEGER }
+    orderProductId: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    orderId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    productId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    }
+}, {
+    tableName: 'OrderProducts',
+    timestamps: false
 });
-
-// Relaciones
-OrderProduct.belongsTo(Order, { foreignKey: 'idOrder' });
-OrderProduct.belongsTo(Product, { foreignKey: 'idProduct' });
 
 export default OrderProduct;

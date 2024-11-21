@@ -1,15 +1,15 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../db.js';
+import sequelize from '../config/db.js';
 import Cart from './cart.model.js'; 
 
 const Payment = sequelize.define('Payment', {
-    idPayment: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    idCart: { type: DataTypes.INTEGER },
+    paymentId: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    cartId: { type: DataTypes.INTEGER },
     paymentMethod: { type: DataTypes.ENUM('PayPal', 'Bank Transfer') },
     paymentStatus: { type: DataTypes.STRING } // 'pending', 'completed', etc.
+}, {
+    tableName: 'payment',
+    timestamps: false
 });
-
-// Relaciones
-Payment.belongsTo(Cart, { foreignKey: 'idCart' });
 
 export default Payment;

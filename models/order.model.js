@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../db.js';
+import sequelize from '../config/db.js';
 import User from './user.model.js'; 
 import OrderProduct from './orderProduct.model.js'; 
 
@@ -11,9 +11,5 @@ const Order = sequelize.define('Order', {
     status: { type: DataTypes.STRING },
     deliveryMethod: { type: DataTypes.ENUM('Pickup', 'Home Delivery') }
 });
-
-// Relaciones
-Order.belongsTo(User, { foreignKey: 'idUser' });
-Order.hasMany(OrderProduct, { foreignKey: 'idOrder' });
 
 export default Order;

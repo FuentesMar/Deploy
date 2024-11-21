@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../db.js';
+import sequelize from '../config/db.js';
 import User from './user.model.js'; 
 
 const Contact = sequelize.define('Contact', {
@@ -8,8 +8,5 @@ const Contact = sequelize.define('Contact', {
     message: { type: DataTypes.TEXT },
     date: { type: DataTypes.DATE }
 });
-
-// Relaciones
-Contact.belongsTo(User, { foreignKey: 'idUser' });
 
 export default Contact;
